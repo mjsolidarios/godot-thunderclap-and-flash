@@ -3,4 +3,4 @@ VFX Experiment with Godot Game Engine. Inspired with Demon Slayer: Kimetsu no Ya
 
 
 
-![](/home/user/Repositories/godot-thunderclap-and-flash/preview.gif)
+![](preview.gif)
