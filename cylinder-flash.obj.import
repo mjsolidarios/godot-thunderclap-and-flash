@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/cylinder-flash.obj-0faeca63820d25dc1434a68f8b434a77.mesh"
+
+[deps]
+
+files=[ "res://.import/cylinder-flash.obj-0faeca63820d25dc1434a68f8b434a77.mesh" ]
+
+source_file="res://cylinder-flash.obj"
+dest_files=[ "res://.import/cylinder-flash.obj-0faeca63820d25dc1434a68f8b434a77.mesh", "res://.import/cylinder-flash.obj-0faeca63820d25dc1434a68f8b434a77.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

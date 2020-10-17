@@ -1,0 +1,958 @@
+[gd_scene load_steps=45 format=2]
+
+[ext_resource path="res://grid.png" type="Texture" id=1]
+[ext_resource path="res://quad-sphere.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://Camera.gd" type="Script" id=3]
+[ext_resource path="res://Main.gd" type="Script" id=4]
+[ext_resource path="res://zzz.png" type="Texture" id=5]
+[ext_resource path="res://smoke-1.png" type="Texture" id=6]
+[ext_resource path="res://smoke-2.png" type="Texture" id=7]
+[ext_resource path="res://smoke-3.png" type="Texture" id=8]
+[ext_resource path="res://smoke-4.png" type="Texture" id=9]
+[ext_resource path="res://lightning-1.png" type="Texture" id=10]
+[ext_resource path="res://flash-1.png" type="Texture" id=11]
+[ext_resource path="res://cylinder-flash.obj" type="ArrayMesh" id=12]
+[ext_resource path="res://cylinder-flash.png" type="Texture" id=13]
+[ext_resource path="res://lightning-extra.png" type="Texture" id=14]
+[ext_resource path="res://slice.png" type="Texture" id=15]
+[ext_resource path="res://half-sphere.obj" type="ArrayMesh" id=16]
+[ext_resource path="res://logos.png" type="Texture" id=17]
+
+[sub_resource type="QuadMesh" id=1]
+
+[sub_resource type="SpatialMaterial" id=2]
+flags_transparent = true
+vertex_color_use_as_albedo = true
+params_billboard_keep_scale = true
+albedo_color = Color( 0.972549, 0.894118, 0.0352941, 1 )
+albedo_texture = ExtResource( 15 )
+emission_enabled = true
+emission = Color( 1, 0.8, 0, 1 )
+emission_energy = 2.0
+emission_operator = 0
+emission_on_uv2 = false
+emission_texture = ExtResource( 15 )
+
+[sub_resource type="ProceduralSky" id=3]
+
+[sub_resource type="Environment" id=4]
+background_mode = 2
+background_sky = SubResource( 3 )
+background_energy = 0.5
+fog_color = Color( 0, 0, 0, 1 )
+ssao_enabled = true
+glow_enabled = true
+glow_intensity = 8.0
+glow_strength = 0.86
+glow_bloom = 0.12
+
+[sub_resource type="PhysicsMaterial" id=5]
+
+[sub_resource type="QuadMesh" id=6]
+
+[sub_resource type="SpatialMaterial" id=7]
+albedo_texture = ExtResource( 1 )
+uv1_scale = Vector3( 50, 100, 0 )
+uv1_offset = Vector3( 0, 0.48, 0 )
+
+[sub_resource type="BoxShape" id=8]
+extents = Vector3( 1, 1, 0.0655738 )
+
+[sub_resource type="SpatialMaterial" id=9]
+flags_transparent = true
+vertex_color_use_as_albedo = true
+params_billboard_mode = 1
+params_billboard_keep_scale = true
+albedo_texture = ExtResource( 5 )
+distance_fade_mode = 1
+distance_fade_min_distance = 0.0
+distance_fade_max_distance = 20.0
+
+[sub_resource type="QuadMesh" id=10]
+material = SubResource( 9 )
+
+[sub_resource type="Curve" id=11]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Animation" id=12]
+resource_name = "SpecialSkill"
+length = 1.5
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Zenitsu:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 5.16, 0.842, 0 ), Vector3( 5.16, 0.842, 0 ), Vector3( -8.95194, 0.842, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("LightningFX/LightningMesh1:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.9, 0.93, 0.96 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, false, true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("LightningFX/OmniLight:light_energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.85, 0.93, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 16.0, 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Zenitsu:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.9, 0.93, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 1, 1, 1 ), Vector3( 1.581, 0.822, 1 ), Vector3( 1, 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("SmokeFX:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.85, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, false, true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SmokeFX/CSGMesh11:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.9, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 3, 3, 1 ), Vector3( 3, 3, 1 ), Vector3( 0, 0, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("SmokeFX/CSGMesh11:translation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.9, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 5.255, 0.736, -1.993 ), Vector3( 5.255, 0.736, -1.993 ), Vector3( 8.769, 2.925, -1.993 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("SmokeFX/CSGMesh12:translation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.9, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 3.822, 1.725, 1.621 ), Vector3( 3.822, 1.725, 1.621 ), Vector3( 4.946, 1.725, 1.621 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("SmokeFX/CSGMesh13:translation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.9, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 2.622, 1.011, 2.388 ), Vector3( 2.622, 1.011, 2.388 ), Vector3( 3.703, 1.011, 2.388 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("SmokeFX/CSGMesh8:translation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.9, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 2.44073, 1.0573, 2.15562 ), Vector3( 2.44073, 1.0573, 2.15562 ), Vector3( 2.696, 1.057, 2.757 ) ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("SmokeFX/CSGMesh3:translation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.9, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 4.1031, 1.30526, 1.43478 ), Vector3( 4.1031, 1.30526, 1.43478 ), Vector3( 4.601, 1.305, 1.435 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("SmokeFX/CSGMesh2:translation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.9, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 2.59356, 1.0573, -0.847299 ), Vector3( 2.59356, 1.0573, -0.847299 ), Vector3( 3.322, 1.057, -1.556 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("SmokeFX/CSGMesh4:translation")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.9, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 5.50335, 1.53736, 1.37044 ), Vector3( 5.50335, 1.53736, 1.37044 ), Vector3( 6.235, 1.537, 1.37 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("SmokeFX/CSGMesh9:translation")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.9, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 4.001, 2.177, 0.418 ), Vector3( 4.001, 2.177, 0.418 ), Vector3( 4.777, 2.676, 0.418 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("SmokeFX/CSGMesh12:material:distance_fade_max_distance")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0.9, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 10.0, 100.0 ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("SmokeFX/CSGMesh7:material:distance_fade_max_distance")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0.9, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 10.0, 100.0 ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("SmokeFX/CSGMesh2:material:distance_fade_max_distance")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0.9, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 10.0, 100.0 ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("SmokeFX/CSGMesh9:material:distance_fade_max_distance")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0.9, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 10.0, 100.0 ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("LightningFX/OmniLight:omni_range")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0, 0.84, 0.93, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 5.6, 0.0 ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("LightningFX/LightningMesh2:visible")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0.01, 0.92, 0.96 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/20/type = "value"
+tracks/20/path = NodePath("cylinder-flash:material/0:distance_fade_max_distance")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0, 0.9, 0.91, 0.94, 0.96 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 800.0, 800.0, 10.0, 10.0, 800.0 ]
+}
+tracks/21/type = "value"
+tracks/21/path = NodePath("cylinder-flash:translation")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/keys = {
+"times": PoolRealArray( 0.9, 0.96 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 3.352, 0.813, 0.072 ), Vector3( -6.266, 0.813, 0.072 ) ]
+}
+tracks/22/type = "value"
+tracks/22/path = NodePath("cylinder-flash:scale")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/keys = {
+"times": PoolRealArray( 0.9, 0.96 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 0.326, 1 ), Vector3( 1, 1.48, 1 ) ]
+}
+tracks/23/type = "value"
+tracks/23/path = NodePath("cylinder-flash:visible")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/keys = {
+"times": PoolRealArray( 0, 0.94, 0.95 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/24/type = "value"
+tracks/24/path = NodePath("PostFX:visible")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/keys = {
+"times": PoolRealArray( 0.94, 0.97, 1.06 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/25/type = "value"
+tracks/25/path = NodePath("PostFX/Lines:visible")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/keys = {
+"times": PoolRealArray( 0, 0.97, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/26/type = "value"
+tracks/26/path = NodePath("PostFX/LightningPost:visible")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/keys = {
+"times": PoolRealArray( 0, 0.97, 1.06 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/27/type = "value"
+tracks/27/path = NodePath("PostFX/LightningPost:material:emission_energy")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/keys = {
+"times": PoolRealArray( 0.97, 1.01, 1.07 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 2.04, 16.0, 0.0 ]
+}
+tracks/28/type = "value"
+tracks/28/path = NodePath("PostFX/LightningPost:translation")
+tracks/28/interp = 1
+tracks/28/loop_wrap = true
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/keys = {
+"times": PoolRealArray( 0.92, 1.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.462, 1.692, 0.637 ), Vector3( -1.259, 1.692, 0.637 ) ]
+}
+tracks/29/type = "value"
+tracks/29/path = NodePath("PostFX/Slice:visible")
+tracks/29/interp = 1
+tracks/29/loop_wrap = true
+tracks/29/imported = false
+tracks/29/enabled = true
+tracks/29/keys = {
+"times": PoolRealArray( 0, 0.94, 1.05 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/30/type = "value"
+tracks/30/path = NodePath("Zenitsu/SliceMain:visible")
+tracks/30/interp = 1
+tracks/30/loop_wrap = true
+tracks/30/imported = false
+tracks/30/enabled = true
+tracks/30/keys = {
+"times": PoolRealArray( 0, 0.27, 0.3, 0.92, 1.09, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, false, true, false, true, false ]
+}
+tracks/31/type = "value"
+tracks/31/path = NodePath("Zenitsu/SliceMain:translation")
+tracks/31/interp = 1
+tracks/31/loop_wrap = true
+tracks/31/imported = false
+tracks/31/enabled = true
+tracks/31/keys = {
+"times": PoolRealArray( 0.29, 0.72, 1.08, 1.17 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( -0.923, 0.736, 0.743 ), Vector3( -0.923, 0.736, 0.743 ), Vector3( -0.923, 0.736, 0.743 ), Vector3( 0.87, 0.736, 0.743 ) ]
+}
+tracks/32/type = "value"
+tracks/32/path = NodePath("Zenitsu/SliceMain:scale")
+tracks/32/interp = 1
+tracks/32/loop_wrap = true
+tracks/32/imported = false
+tracks/32/enabled = true
+tracks/32/keys = {
+"times": PoolRealArray( 0.29, 0.6, 1.08, 1.17 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 8.859, 0, 1 ), Vector3( 8.859, 1.047, 1 ), Vector3( 8.859, 1.047, 1 ), Vector3( 8.859, 0, 1 ) ]
+}
+tracks/33/type = "value"
+tracks/33/path = NodePath("Demon:visible")
+tracks/33/interp = 1
+tracks/33/loop_wrap = true
+tracks/33/imported = false
+tracks/33/enabled = true
+tracks/33/keys = {
+"times": PoolRealArray( 0, 1.47, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, true, false ]
+}
+tracks/34/type = "value"
+tracks/34/path = NodePath("DeadDemon:visible")
+tracks/34/interp = 1
+tracks/34/loop_wrap = true
+tracks/34/imported = false
+tracks/34/enabled = true
+tracks/34/keys = {
+"times": PoolRealArray( 0.56, 1.47, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, false, true ]
+}
+tracks/35/type = "value"
+tracks/35/path = NodePath("DeadDemon/RigidBody2:sleeping")
+tracks/35/interp = 1
+tracks/35/loop_wrap = true
+tracks/35/imported = false
+tracks/35/enabled = true
+tracks/35/keys = {
+"times": PoolRealArray( 1.47, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/36/type = "value"
+tracks/36/path = NodePath("DeadDemon/RigidBody3:sleeping")
+tracks/36/interp = 1
+tracks/36/loop_wrap = true
+tracks/36/imported = false
+tracks/36/enabled = true
+tracks/36/keys = {
+"times": PoolRealArray( 1.47, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/37/type = "value"
+tracks/37/path = NodePath("ZZZParticles:visible")
+tracks/37/interp = 1
+tracks/37/loop_wrap = true
+tracks/37/imported = false
+tracks/37/enabled = true
+tracks/37/keys = {
+"times": PoolRealArray( 0, 0.28 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/38/type = "value"
+tracks/38/path = NodePath("OmniLight:light_energy")
+tracks/38/interp = 1
+tracks/38/loop_wrap = true
+tracks/38/imported = false
+tracks/38/enabled = true
+tracks/38/keys = {
+"times": PoolRealArray( 0, 0.89, 0.94, 0.99, 1.08 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 16.0, 16.0, 0.0 ]
+}
+
+[sub_resource type="SpatialMaterial" id=13]
+flags_transparent = true
+params_billboard_keep_scale = true
+albedo_texture = ExtResource( 6 )
+distance_fade_mode = 1
+distance_fade_min_distance = 0.0
+distance_fade_max_distance = 26.5
+
+[sub_resource type="SpatialMaterial" id=14]
+flags_transparent = true
+params_billboard_keep_scale = true
+albedo_texture = ExtResource( 7 )
+distance_fade_mode = 1
+distance_fade_min_distance = 0.0
+distance_fade_max_distance = 26.5
+
+[sub_resource type="SpatialMaterial" id=15]
+flags_transparent = true
+params_billboard_keep_scale = true
+albedo_texture = ExtResource( 9 )
+distance_fade_mode = 1
+distance_fade_min_distance = 0.0
+distance_fade_max_distance = 26.5
+
+[sub_resource type="SpatialMaterial" id=16]
+flags_transparent = true
+params_billboard_keep_scale = true
+albedo_texture = ExtResource( 8 )
+distance_fade_mode = 1
+distance_fade_min_distance = 0.0
+distance_fade_max_distance = 26.5
+
+[sub_resource type="SpatialMaterial" id=17]
+flags_transparent = true
+albedo_texture = ExtResource( 10 )
+emission_enabled = true
+emission = Color( 0.478431, 0.890196, 1, 1 )
+emission_energy = 2.0
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="SpatialMaterial" id=18]
+flags_transparent = true
+albedo_texture = ExtResource( 11 )
+emission_enabled = true
+emission = Color( 0.984314, 0.968627, 0.592157, 1 )
+emission_energy = 0.96
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="SpatialMaterial" id=19]
+flags_transparent = true
+albedo_texture = ExtResource( 13 )
+emission_enabled = true
+emission = Color( 0, 0, 0, 1 )
+emission_energy = 0.73
+emission_operator = 0
+emission_on_uv2 = false
+emission_texture = ExtResource( 13 )
+
+[sub_resource type="SpatialMaterial" id=20]
+flags_transparent = true
+params_billboard_keep_scale = true
+albedo_texture = ExtResource( 15 )
+emission_enabled = true
+emission = Color( 0.929412, 0.294118, 0.188235, 1 )
+emission_energy = 4.16
+emission_operator = 0
+emission_on_uv2 = false
+emission_texture = ExtResource( 15 )
+
+[sub_resource type="SpatialMaterial" id=21]
+emission_enabled = true
+emission = Color( 1, 0.913725, 0, 1 )
+emission_energy = 1.27
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="CylinderMesh" id=22]
+material = SubResource( 21 )
+top_radius = 0.03
+bottom_radius = 0.03
+height = 5.0
+radial_segments = 4
+
+[sub_resource type="SpatialMaterial" id=23]
+flags_transparent = true
+params_billboard_keep_scale = true
+albedo_texture = ExtResource( 14 )
+emission_enabled = true
+emission = Color( 0.54902, 0.968627, 1, 1 )
+emission_energy = 16.0
+emission_operator = 0
+emission_on_uv2 = false
+emission_texture = ExtResource( 14 )
+distance_fade_mode = 1
+distance_fade_min_distance = 0.0
+distance_fade_max_distance = 25.0
+
+[sub_resource type="PhysicsMaterial" id=24]
+
+[sub_resource type="CapsuleShape" id=25]
+radius = 0.886015
+height = 0.002
+
+[sub_resource type="PhysicsMaterial" id=26]
+
+[sub_resource type="CapsuleShape" id=27]
+radius = 0.925239
+height = 0.002
+
+[node name="Spatial" type="Spatial"]
+script = ExtResource( 4 )
+
+[node name="Zenitsu" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.16, 0.842, 0 )
+use_in_baked_light = true
+mesh = ExtResource( 2 )
+material/0 = null
+
+[node name="SliceMain" type="CSGMesh" parent="Zenitsu"]
+transform = Transform( 8.859, 0, 0, 0, 0.0337742, 0, 0, 0, 1, -0.923, 0.736, 0.743 )
+visible = false
+mesh = SubResource( 1 )
+material = SubResource( 2 )
+
+[node name="Demon" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.889113, 0.457688, 0, -0.457688, 0.889113, -5.459, 0.842, 0 )
+use_in_baked_light = true
+mesh = ExtResource( 2 )
+material/0 = null
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 4 )
+
+[node name="StaticBody" type="StaticBody" parent="."]
+transform = Transform( 1000, 0, 0, 0, -4.37114e-05, 1, 0, -1000, -4.37114e-08, 0, 0, 0 )
+physics_material_override = SubResource( 5 )
+
+[node name="Floor" type="CSGMesh" parent="StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, -3.46945e-18, 0, 0, 1, 0, 0, 0 )
+mesh = SubResource( 6 )
+material = SubResource( 7 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, -6.93889e-18, 0, 0, 1, 0, 0, 0 )
+shape = SubResource( 8 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.673025, 0.739619, 0, -0.739619, 0.673025, -0.483, 5.814, 5.072 )
+current = true
+fov = 85.1
+script = ExtResource( 3 )
+speed = 0.2
+decay_rate = 1.0
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( -0.0172781, 0.625095, -0.780358, 0, 0.780474, 0.625188, 0.999851, 0.0108021, -0.0134851, 5.5738, 5.81776, 0 )
+light_energy = 0.5
+shadow_enabled = true
+
+[node name="ZZZParticles" type="CPUParticles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.997, 1.66, 0.236 )
+amount = 6
+lifetime = 2.0
+preprocess = 10.0
+speed_scale = 0.2
+mesh = SubResource( 10 )
+gravity = Vector3( 0.5, 1, 0 )
+angular_velocity = 1.0
+angular_velocity_random = 1.0
+tangential_accel = 1.0
+tangential_accel_random = 1.0
+damping = 0.1
+scale_amount_curve = SubResource( 11 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/SpecialSkill = SubResource( 12 )
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="SmokeFX" type="Spatial" parent="."]
+visible = false
+
+[node name="CSGMesh11" type="CSGMesh" parent="SmokeFX"]
+transform = Transform( -4.81475e-07, -2.95527, 0.172032, 3, -4.88762e-07, 2.42771e-15, 8.40829e-08, 0.516097, 0.985091, 5.255, 0.736, -1.993 )
+mesh = SubResource( 1 )
+material = SubResource( 13 )
+
+[node name="CSGMesh12" type="CSGMesh" parent="SmokeFX"]
+transform = Transform( -4.88762e-07, -3, 0, 3, -4.88762e-07, 0, 0, 0, 1, 3.822, 1.725, 1.621 )
+mesh = SubResource( 1 )
+material = SubResource( 13 )
+
+[node name="CSGMesh13" type="CSGMesh" parent="SmokeFX"]
+transform = Transform( -4.88762e-07, -3, 0, 3, -4.88762e-07, 0, 0, 0, 1, 2.622, 1.011, 2.388 )
+mesh = SubResource( 1 )
+material = SubResource( 13 )
+
+[node name="CSGMesh8" type="CSGMesh" parent="SmokeFX"]
+transform = Transform( -2.79104, 0.939875, -0.190536, -0.708746, -0.344207, 0.964895, 0.841296, 2.8281, 0.180759, 2.44073, 1.0573, 2.15562 )
+mesh = SubResource( 1 )
+material = SubResource( 13 )
+
+[node name="CSGMesh3" type="CSGMesh" parent="SmokeFX"]
+transform = Transform( 2.4382, -1.7479, 0, 1.7479, 2.4382, 0, 0, 0, 1, 4.1031, 1.30526, 1.43478 )
+mesh = SubResource( 1 )
+material = SubResource( 13 )
+
+[node name="CSGMesh2" type="CSGMesh" parent="SmokeFX"]
+transform = Transform( 2.4382, -1.7479, 0, 1.7479, 2.4382, 0, 0, 0, 1, 2.59356, 1.0573, -0.847299 )
+mesh = SubResource( 1 )
+material = SubResource( 14 )
+
+[node name="CSGMesh4" type="CSGMesh" parent="SmokeFX"]
+transform = Transform( 2.81388, -1.04022, 0, 1.04022, 2.81388, 0, 0, 0, 1, 5.50335, 1.53736, 1.37044 )
+mesh = SubResource( 1 )
+material = SubResource( 14 )
+
+[node name="CSGMesh9" type="CSGMesh" parent="SmokeFX"]
+transform = Transform( 1.07085e-08, 3.33, 0, -0.884357, 3.91066e-08, 0.173648, 0.155936, -6.89554e-09, 0.984808, 4.001, 2.177, 0.418 )
+mesh = SubResource( 1 )
+material = SubResource( 15 )
+
+[node name="CSGMesh5" type="CSGMesh" parent="SmokeFX"]
+transform = Transform( 8.93375, 0.0115132, 0, -0.00163633, 0.0370933, 0.999705, 0.0673403, -1.52651, 0.0242923, 3.42443, 0.0436851, 0.47964 )
+mesh = SubResource( 1 )
+material = SubResource( 16 )
+
+[node name="CSGMesh6" type="CSGMesh" parent="SmokeFX"]
+transform = Transform( 8.93375, 0.0115132, 0, -0.00163633, 0.0370933, 0.999705, 0.0673403, -1.52651, 0.0242923, 5.259, 0.044, -0.328 )
+mesh = SubResource( 1 )
+material = SubResource( 16 )
+
+[node name="CSGMesh7" type="CSGMesh" parent="SmokeFX"]
+transform = Transform( -8.934, 3.38223e-07, 0, -7.07169e-08, -0.0252155, 0.999705, 2.91021e-06, 1.03769, 0.0242924, 5.376, 1.306, 1.203 )
+mesh = SubResource( 1 )
+material = SubResource( 16 )
+
+[node name="CSGMesh" type="CSGMesh" parent="SmokeFX"]
+transform = Transform( 2.4382, -1.7479, 0, 1.7479, 2.4382, 0, 0, 0, 1, 3.82735, 1.0573, -1.31224 )
+mesh = SubResource( 1 )
+material = SubResource( 13 )
+
+[node name="CSGMesh10" type="CSGMesh" parent="SmokeFX"]
+transform = Transform( 3.57746e-08, -3, 0, 3, 3.57746e-08, 0, 0, 0, 1, 5.794, 1.057, -1.312 )
+mesh = SubResource( 1 )
+material = SubResource( 13 )
+
+[node name="LightningFX" type="Spatial" parent="."]
+
+[node name="LightningMesh1" type="CSGMesh" parent="LightningFX"]
+transform = Transform( 4.428, 0, 0, 0, -1.30499e-07, 1, 0, -0.801, -1.62921e-07, 1.196, 1.083, 0.248 )
+visible = false
+mesh = SubResource( 1 )
+material = SubResource( 17 )
+
+[node name="LightningMesh2" type="CSGMesh" parent="LightningFX"]
+transform = Transform( 2, 0, 0, 0, 1.32795, 0.707107, 0, -1.32795, 0.707107, 3.129, 1.437, 0.905 )
+visible = false
+mesh = SubResource( 1 )
+material = SubResource( 18 )
+
+[node name="OmniLight" type="OmniLight" parent="LightningFX"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.52726, 0.77469, 0 )
+light_color = Color( 0.411765, 0.682353, 0.956863, 1 )
+light_energy = 7.99999
+omni_range = 0.0
+
+[node name="cylinder-flash" type="MeshInstance" parent="."]
+transform = Transform( -1.62921e-07, 1.48, 0, -1, -2.41123e-07, 0, 0, 0, 1, -6.266, 0.813, 0.072 )
+visible = false
+mesh = ExtResource( 12 )
+material/0 = SubResource( 19 )
+
+[node name="PostFX" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.093, 0, 0 )
+
+[node name="Slice" type="CSGMesh" parent="PostFX"]
+transform = Transform( 16.628, 0, 0, 0, 1.743, 0, 0, 0, 1, -5.223, 1.578, 0.743 )
+visible = false
+mesh = SubResource( 1 )
+material = SubResource( 20 )
+
+[node name="Lines" type="Spatial" parent="PostFX"]
+visible = false
+
+[node name="CSGMesh" type="CSGMesh" parent="PostFX/Lines"]
+transform = Transform( -1.62921e-07, -0.8, 0, 1, -1.30337e-07, 0, 0, 0, 1, -0.617, 2.072, 0.560205 )
+mesh = SubResource( 22 )
+
+[node name="CSGMesh6" type="CSGMesh" parent="PostFX/Lines"]
+transform = Transform( -1.62921e-07, -0.078, 0, 1, -1.27078e-08, 0, 0, 0, 1, 1.891, 2.072, 0 )
+mesh = SubResource( 22 )
+
+[node name="CSGMesh5" type="CSGMesh" parent="PostFX/Lines"]
+transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, 0.561, 2.269, 0 )
+mesh = SubResource( 22 )
+
+[node name="CSGMesh2" type="CSGMesh" parent="PostFX/Lines"]
+transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, -0.891, 1.167, -0.893899 )
+mesh = SubResource( 22 )
+
+[node name="CSGMesh3" type="CSGMesh" parent="PostFX/Lines"]
+transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, -0.023, 0.273, 0.596871 )
+mesh = SubResource( 22 )
+
+[node name="CSGMesh7" type="CSGMesh" parent="PostFX/Lines"]
+transform = Transform( -1.62921e-07, -0.119, 0, 1, -1.93876e-08, 0, 0, 0, 1, 3.208, 0.273, -0.462402 )
+mesh = SubResource( 22 )
+
+[node name="CSGMesh8" type="CSGMesh" parent="PostFX/Lines"]
+transform = Transform( -1.62921e-07, -0.054, 0, 1, -8.79772e-09, 0, 0, 0, 1, 3.903, 0.273, 0.103686 )
+mesh = SubResource( 22 )
+
+[node name="CSGMesh4" type="CSGMesh" parent="PostFX/Lines"]
+transform = Transform( -1.62921e-07, -0.5, 0, 1, -8.14603e-08, 0, 0, 0, 2, 1.253, 0.762, -0.313666 )
+mesh = SubResource( 22 )
+
+[node name="LightningPost" type="CSGMesh" parent="PostFX"]
+transform = Transform( -5.59795e-07, -6.534, 0, 3.436, -1.06452e-06, 0, 0, 0, 1, -0.211435, 1.692, 0.637 )
+visible = false
+mesh = SubResource( 1 )
+material = SubResource( 23 )
+
+[node name="DeadDemon" type="Spatial" parent="."]
+visible = false
+
+[node name="RigidBody2" type="RigidBody" parent="DeadDemon"]
+transform = Transform( 1, 0, 0, 0, -1, 3.25841e-07, 0, -3.25841e-07, -1, -5.46072, 0.800172, 0 )
+physics_material_override = SubResource( 24 )
+sleeping = true
+
+[node name="half-sphere" type="MeshInstance" parent="DeadDemon/RigidBody2"]
+mesh = ExtResource( 16 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="DeadDemon/RigidBody2"]
+transform = Transform( 1, 0, 0, 0, 1, 8.52651e-14, 0, -8.52651e-14, 1, 0, 0.686823, 2.3965e-07 )
+shape = SubResource( 25 )
+
+[node name="RigidBody3" type="RigidBody" parent="DeadDemon"]
+transform = Transform( 0.942087, -0.335369, 0, 0.335369, 0.942087, 0, 0, 0, 1, -5.46072, 1.39315, 0.243769 )
+physics_material_override = SubResource( 26 )
+sleeping = true
+
+[node name="half-sphere" type="MeshInstance" parent="DeadDemon/RigidBody3"]
+mesh = ExtResource( 16 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="DeadDemon/RigidBody3"]
+transform = Transform( 1, 0, 0, 0, 1, 5.68434e-14, 0, -5.68434e-14, 1, 0, 0.631019, 3.54491e-07 )
+shape = SubResource( 27 )
+
+[node name="Control" type="Control" parent="."]
+anchor_left = 0.949
+anchor_top = 1.0
+anchor_right = 0.949
+anchor_bottom = 1.0
+margin_left = -297.0
+margin_top = -52.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button2" type="Button" parent="Control"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -48.0
+margin_top = -10.0
+margin_bottom = 10.0
+text = "Reset"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="Control"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -10.0
+margin_right = 206.0
+margin_bottom = 10.0
+text = "Thunderclap and Flash"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OmniLight" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.801189, 0.870259, 0 )
+light_color = Color( 0.882353, 0.87451, 0.776471, 1 )
+light_energy = 0.0
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -211.0
+margin_bottom = 131.0
+texture = ExtResource( 17 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="pressed" from="Control/Button2" to="." method="_on_Button2_pressed"]
+[connection signal="pressed" from="Control/Button" to="." method="_on_Button_pressed"]
